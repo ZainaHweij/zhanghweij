@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import heroGround from "@/assets/heroground.png";
 import FlippingCards from "@/components/FlippingCards";
-import Registration from "@/components//Registration";
+import Registration from "@/components/Registration";
 
 
 const Index = () => {
