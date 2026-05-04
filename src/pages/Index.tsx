@@ -5,6 +5,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import heroGround from "@/assets/heroground.png";
 import FlippingCards from "@/components/FlippingCards";
+import Registration from "@/components//Registration";
+
 
 const Index = () => {
   return (
@@ -67,6 +69,12 @@ const Index = () => {
           </div>
         </div>
       </section>
+      {/* REGISTRATION SECTION */}
+<section className="py-20 bg-gray-100">
+  <div className="container mx-auto px-4">
+    <Registration />
+  </div>
+</section>
 
       <Footer />
     </div>
