@@ -22,13 +22,14 @@ const consultants: Consultant[] = [
       "USC — $80K Scholarship",
       "UCLA OOS",
       "Northeastern — $92K Scholarship",
-      "Purdue — Honors College + $10K Annual Scholarship",
+      "Northwestern RD",
       "UCSB Research Mentorship Program — 2.5% Acceptance Rate",
       "ASTACAP Violin Level 10",
-      "BMES Presenter",
-      "US Army Outstanding Accomplishment",
+      "National Biomedical Engineering Conference Speaker",
       "Presidential Volunteer Service Gold Award",
       "1570 SAT",
+      "Nonprofit Founder — 300+ Workshop Students",
+      "Scientific Outreach Club President — ~50 Members",
     ],
   },
   {
@@ -37,16 +38,17 @@ const consultants: Consultant[] = [
     image: hweij,
     bio: "Zaina is an incoming Duke bioengineering student who combined academic excellence with a highly intentional pursuit of unconventional, engineering-focused experiences throughout high school. She manually sought and developed PhD-level mentorship connections, selective extracurricular involvement, and competitive achievements that truly excited academic interest compared to stereotypical STEM extracurriculars. A strong writer, her Common App personal statement was described by her AP teacher as \"one of the best, most profound ones I've ever read,\" adding that it \"really sang.\" She helps students refine their story and focus their energy on their work rather than endlessly cold emailing for broad opportunity.",
     achievements: [
-      "UW Neuroscience Direct Admit",
-      "Duke RD Admit",
+      "UW Neuroscience Direct Admit — <10 Seats State-Wide",
+      "Duke RD Admit — 3.7%",
       "National Merit Finalist",
-      "OHSU PSI Alumna",
-      "MIT BWSI SAT Program Alumna",
-      "NCWIT Aspirations in Computing National Honorable Mention",
+      "OHSU PSI Alumna — 25% Acceptance",
+      "MIT BWSI SAT Program Alumna — Cybersecurity",
+      "NCWIT Aspirations in Computing National Honorable Mention — 3,300 Applicants",
       "Regeneron Biomedical Science Award $400",
       "Cited Researcher by University Hospital Zurich",
-      "Nonprofit Cofounder",
-      "IEEE Research Publication",
+      "Nonprofit Founder — Reaching Students Worldwide",
+      "JEEE Research Publication",
+      "US Army Research Award",
     ],
   },
 ];
@@ -61,7 +63,7 @@ function Ticker({ items }: { items: string[] }) {
     if (!el) return;
 
     const step = () => {
-      posRef.current -= 0.8;
+      posRef.current -= 1.2;
       const half = el.scrollWidth / 2;
       if (Math.abs(posRef.current) >= half) {
         posRef.current = 0;
