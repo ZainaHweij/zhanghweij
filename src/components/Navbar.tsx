@@ -23,7 +23,7 @@ const Navbar = () => {
           className="text-lg font-medium tracking-tight text-foreground"
         >
           Zhang-Hweij{" "}
-          <span className="text-secondary-foreground font-semibold">
+          <span className="text-secondary font-semibold">
             Consulting
           </span>
         </Link>

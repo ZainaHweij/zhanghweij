@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import heroGround from "@/assets/heroground.png";
 import FlippingCards from "@/components/FlippingCards";
 import Registration from "@/components/Registration";
-
+import AboutMe from "@/components/AboutMe";
 
 const Index = () => {
   return (
@@ -15,53 +15,32 @@ const Index = () => {
 
       {/* HERO */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-
-        {/* BACKGROUND (NO TINT) */}
         <div className="absolute inset-0 -z-10">
-          <img
-            src={heroGround}
-            alt="background"
-            className="w-full h-full object-cover"
-          />
+          <img src={heroGround} alt="background" className="w-full h-full object-cover" />
         </div>
 
-        {/* CENTERED CONTENT WRAPPER */}
-        <div className="container mx-auto px-4 flex items-center justify-center">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between w-full max-w-6xl mx-auto gap-20">
 
-          <div className="flex items-center justify-between w-full max-w-6xl gap-20">
-
-            {/* LEFT TEXT */}
             <div className="max-w-2xl text-white">
               <p className="text-sm uppercase tracking-widest mb-4 opacity-80 font-medium">
                 Modern, relevant college counseling
               </p>
-
               <h1 className="text-4xl md:text-6xl font-semibold leading-tight mb-6">
                 Stand out in a crowded applicant pool.
               </h1>
-
               <div className="flex flex-col sm:flex-row gap-4">
-
-                {/* WHITE BUTTON */}
-                <Button
-                  asChild
-                  size="lg"
-                  className="bg-white text-black hover:bg-white/90 font-medium"
-                >
+                <Button asChild size="lg" className="bg-white text-black hover:bg-white/90 font-medium">
                   <Link to="/pricing">
                     Schedule a Free Call <ArrowRight className="ml-1" size={18} />
                   </Link>
                 </Button>
-
-                {/* OUTLINE BUTTON */}
                 <Button asChild variant="heroOutline" size="lg">
                   <a href="#services">Our Services</a>
                 </Button>
-
               </div>
             </div>
 
-            {/* RIGHT CARDS */}
             <div className="flex items-center justify-center">
               <FlippingCards />
             </div>
@@ -69,12 +48,17 @@ const Index = () => {
           </div>
         </div>
       </section>
-      {/* REGISTRATION SECTION */}
-<section className="py-20 bg-gray-100">
-  <div className="container mx-auto px-4">
-    <Registration />
-  </div>
-</section>
+   
+
+      {/* REGISTRATION */}
+      <section className="bg-gray-100">
+        <div className="container mx-auto px-4">
+             <AboutMe />
+          <Registration />
+        </div>
+      </section>
+
+      {/* ABOUT */}
 
       <Footer />
     </div>
