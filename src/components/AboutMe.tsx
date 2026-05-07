@@ -12,6 +12,25 @@ interface Consultant {
 
 const consultants: Consultant[] = [
   {
+    name: "Zaina Hweij",
+    role: "College Admissions Consultant",
+    image: hweij,
+    bio: 'Zaina is an incoming Duke bioengineering student who combined academic excellence with a highly intentional pursuit of unconventional, engineering-focused experiences throughout high school. She manually sought and developed PhD-level mentorship connections, selective extracurricular involvement, and competitive achievements that truly excited academic interest compared to stereotypical STEM extracurriculars. A strong writer, her Common App personal statement was described by her AP teacher as "one of the best, most profound ones I\'ve ever read," adding that it "really sang." She helps students refine their story and focus their energy on their work rather than endlessly cold emailing for broad opportunity.',
+    achievements: [
+      "UW Neuroscience Direct Admit — <10 Seats State-Wide",
+      "Duke RD Admit — 3.7%",
+      "National Merit Finalist",
+      "OHSU PSI Alumna — 25% Acceptance",
+      "MIT BWSI SAT Program Alumna — Cybersecurity",
+      "NCWIT Aspirations in Computing National Honorable Mention — 3,300 Applicants",
+      "Regeneron Biomedical Science Award $400",
+      "Cited Researcher by University Hospital Zurich",
+      "Nonprofit Founder — Reaching Students Worldwide",
+      "JEEE Research Publication",
+      "US Army Research Award",
+    ],
+  },
+  {
     name: "Sophie Zhang",
     role: "College Admissions Consultant",
     image: zhang,
@@ -30,25 +49,6 @@ const consultants: Consultant[] = [
       "1570 SAT",
       "Nonprofit Founder — 300+ Workshop Students",
       "Scientific Outreach Club President — ~50 Members",
-    ],
-  },
-  {
-    name: "Zaina Hweij",
-    role: "College Admissions Consultant",
-    image: hweij,
-    bio: "Zaina is an incoming Duke bioengineering student who combined academic excellence with a highly intentional pursuit of unconventional, engineering-focused experiences throughout high school. She manually sought and developed PhD-level mentorship connections, selective extracurricular involvement, and competitive achievements that truly excited academic interest compared to stereotypical STEM extracurriculars. A strong writer, her Common App personal statement was described by her AP teacher as \"one of the best, most profound ones I've ever read,\" adding that it \"really sang.\" She helps students refine their story and focus their energy on their work rather than endlessly cold emailing for broad opportunity.",
-    achievements: [
-      "UW Neuroscience Direct Admit — <10 Seats State-Wide",
-      "Duke RD Admit — 3.7%",
-      "National Merit Finalist",
-      "OHSU PSI Alumna — 25% Acceptance",
-      "MIT BWSI SAT Program Alumna — Cybersecurity",
-      "NCWIT Aspirations in Computing National Honorable Mention — 3,300 Applicants",
-      "Regeneron Biomedical Science Award $400",
-      "Cited Researcher by University Hospital Zurich",
-      "Nonprofit Founder — Reaching Students Worldwide",
-      "JEEE Research Publication",
-      "US Army Research Award",
     ],
   },
 ];
@@ -150,27 +150,51 @@ function ConsultantRow({
   );
 }
 
+function CategorySection({
+  title,
+  subtitle,
+  consultant,
+}: {
+  title: string;
+  subtitle: string;
+  consultant: Consultant;
+}) {
+  return (
+    <div>
+      <div className="mb-4">
+        <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-1">
+          {title} →
+        </h3>
+        <p className="text-base md:text-lg text-gray-600 italic">{subtitle}</p>
+      </div>
+      <ConsultantRow consultant={consultant} />
+    </div>
+  );
+}
+
 const AboutMe = () => (
   <section className="bg-gray-100 py-20">
     <div className="container mx-auto max-w-6xl px-4">
-      <div className="mb-16">
-        <p className="text-sm uppercase tracking-widest mb-3 text-gray-400 font-medium">
-          Trustworthy, personalized guidance
-        </p>
-        <h2 className="text-4xl md:text-6xl font-semibold leading-tight text-gray-900">
-          Meet your consultants.
+      <div className="mb-8">
+        <h2 className="text-4xl md:text-6xl font-bold text-secondary mb-2">
+          College is confusing.
         </h2>
+        <p className="text-base text-gray-700 italic">
+          Don't worry – We've got you covered
+        </p>
       </div>
 
-      <div className="flex flex-col gap-12">
-        {consultants.map((c, i) => (
-          <ConsultantRow
-            key={c.name}
-            consultant={c}
-            reverse={false}
-            imgPosition={i === 0 ? "object-[center_20%]" : "object-top"}
-          />
-        ))}
+      <div className="flex flex-col gap-8">
+        <CategorySection
+          title="SHOOTING FOR THE TOP?"
+          subtitle="We understand what it takes to get there"
+          consultant={consultants[0]}
+        />
+        <CategorySection
+          title="OR MAYBE YOU'RE COMPLETELY LOST"
+          subtitle="It's not too late at all"
+          consultant={consultants[1]}
+        />
       </div>
     </div>
   </section>

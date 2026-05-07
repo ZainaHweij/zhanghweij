@@ -16,12 +16,15 @@ const Index = () => {
       {/* HERO */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 -z-10">
-          <img src={heroGround} alt="background" className="w-full h-full object-cover" />
+          <img
+            src={heroGround}
+            alt="background"
+            className="w-full h-full object-cover"
+          />
         </div>
 
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between w-full max-w-6xl mx-auto gap-20">
-
             <div className="max-w-2xl text-white">
               <p className="text-sm uppercase tracking-widest mb-4 opacity-80 font-medium">
                 Modern, relevant college counseling
@@ -30,9 +33,14 @@ const Index = () => {
                 Stand out in a crowded applicant pool.
               </h1>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button asChild size="lg" className="bg-white text-black hover:bg-white/90 font-medium">
+                <Button
+                  asChild
+                  size="lg"
+                  className="bg-white text-black hover:bg-white/90 font-medium"
+                >
                   <Link to="/pricing">
-                    Schedule a Free Call <ArrowRight className="ml-1" size={18} />
+                    Schedule a Free Call{" "}
+                    <ArrowRight className="ml-1" size={18} />
                   </Link>
                 </Button>
                 <Button asChild variant="heroOutline" size="lg">
@@ -44,16 +52,14 @@ const Index = () => {
             <div className="flex items-center justify-center">
               <FlippingCards />
             </div>
-
           </div>
         </div>
       </section>
-   
 
       {/* REGISTRATION */}
       <section className="bg-gray-100">
         <div className="container mx-auto px-4">
-             <AboutMe />
+          <AboutMe />
           <Registration />
         </div>
       </section>
