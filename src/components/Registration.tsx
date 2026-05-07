@@ -9,15 +9,15 @@ import emailjs from "@emailjs/browser";
 //      {{to_email}}  {{first_name}}  {{role}}  {{help_with}}
 //      {{contact_method}}  {{best_time}}  {{notes}}  {{phone}}
 // 4. Go to Account → copy your Public Key
-const EMAILJS_SERVICE_ID  = "service_8oi6c3b";
+const EMAILJS_SERVICE_ID = "service_8oi6c3b";
 const EMAILJS_TEMPLATE_ID = "template_hxh4ysg";
-const EMAILJS_PUBLIC_KEY  = "n74Cl2vNN3th6wT5D";
+const EMAILJS_PUBLIC_KEY = "n74Cl2vNN3th6wT5D";
 // ─────────────────────────────────────────────────────────────────────────────
 
-const BRAND       = "#2e2a79";
+const BRAND = "#2e2a79";
 const BRAND_LIGHT = "#eeedf8";
 const BRAND_HOVER = "#231f5e";
-const BRAND_RING  = "#b8b5e8";
+const BRAND_RING = "#b8b5e8";
 
 type FormData = {
   firstName: string;
@@ -103,7 +103,10 @@ export default function Registration() {
 
   const helpSummary = () => {
     if (form.helpWith.includes("Other") && form.otherHelp) {
-      return [...form.helpWith.filter((h) => h !== "Other"), form.otherHelp].join(", ");
+      return [
+        ...form.helpWith.filter((h) => h !== "Other"),
+        form.otherHelp,
+      ].join(", ");
     }
     return form.helpWith.join(", ");
   };
@@ -141,16 +144,16 @@ export default function Registration() {
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
         {
-          to_email:       form.email,
-          first_name:     form.firstName,
-          phone:          form.phone,
-          role:           form.role,
-          help_with:      helpSummary(),
+          to_email: form.email,
+          first_name: form.firstName,
+          phone: form.phone,
+          role: form.role,
+          help_with: helpSummary(),
           contact_method: form.contactMethod,
-          best_time:      form.bestTime,
-          notes:          form.notes,
+          best_time: form.bestTime,
+          notes: form.notes,
         },
-        EMAILJS_PUBLIC_KEY
+        EMAILJS_PUBLIC_KEY,
       );
       console.log("EmailJS success:", result.status, result.text);
     } catch (err: unknown) {
@@ -165,20 +168,21 @@ export default function Registration() {
 
   const emailErr = form.email !== "" && !isValidEmail(form.email);
   const phoneErr = form.phone !== "" && !isValidPhone(form.phone);
-  const errMsg   = "text-xs text-red-500 mt-0.5 mb-2";
-  const inputBase = "w-full p-4 border rounded-xl transition focus:outline-none";
+  const errMsg = "text-xs text-red-500 mt-0.5 mb-2";
+  const inputBase =
+    "w-full p-4 border rounded-xl transition focus:outline-none";
 
   const primaryBtn = (active: boolean): React.CSSProperties => ({
     background: active ? BRAND : "#D1D5DB",
-    color:      active ? "#fff" : "#6B7280",
-    cursor:     active ? "pointer" : "not-allowed",
+    color: active ? "#fff" : "#6B7280",
+    cursor: active ? "pointer" : "not-allowed",
     transition: "background 0.2s",
   });
 
   const toggleBtn = (selected: boolean): React.CSSProperties => ({
     background: selected ? BRAND : "#fff",
-    color:      selected ? "#fff" : "#111827",
-    border:     selected ? `1.5px solid ${BRAND}` : "1px solid #E5E7EB",
+    color: selected ? "#fff" : "#111827",
+    border: selected ? `1.5px solid ${BRAND}` : "1px solid #E5E7EB",
     transition: "all 0.15s",
   });
 
@@ -187,7 +191,6 @@ export default function Registration() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-100">
         <div className="bg-white p-10 rounded-2xl shadow-lg w-full max-w-2xl text-center">
-
           <div
             className="mx-auto mb-6 flex items-center justify-center rounded-full"
             style={{ width: 80, height: 80, background: BRAND_LIGHT }}
@@ -208,8 +211,7 @@ export default function Registration() {
             You're all set!
           </h1>
           <p className="text-gray-600 text-lg mb-2">
-            Thanks,{" "}
-            <span className="font-semibold">{form.firstName}</span>!
+            Thanks, <span className="font-semibold">{form.firstName}</span>!
             We'll be in contact soon.
           </p>
           <p className="text-gray-500 text-sm mb-8">
@@ -228,29 +230,54 @@ export default function Registration() {
             <p className="font-semibold mb-3" style={{ color: BRAND }}>
               Your responses
             </p>
-            <p className="text-gray-700"><span className="font-medium">Name:</span> {form.firstName}</p>
-            <p className="text-gray-700"><span className="font-medium">Email:</span> {form.email}</p>
-            <p className="text-gray-700"><span className="font-medium">Phone:</span> {form.phone}</p>
-            <p className="text-gray-700"><span className="font-medium">Role:</span> {form.role}</p>
-            <p className="text-gray-700"><span className="font-medium">Help with:</span> {helpSummary()}</p>
-            <p className="text-gray-700"><span className="font-medium">Contact via:</span> {form.contactMethod}</p>
-            <p className="text-gray-700"><span className="font-medium">Best time:</span> {form.bestTime}</p>
-            <p className="text-gray-700"><span className="font-medium">Notes:</span> {form.notes}</p>
+            <p className="text-gray-700">
+              <span className="font-medium">Name:</span> {form.firstName}
+            </p>
+            <p className="text-gray-700">
+              <span className="font-medium">Email:</span> {form.email}
+            </p>
+            <p className="text-gray-700">
+              <span className="font-medium">Phone:</span> {form.phone}
+            </p>
+            <p className="text-gray-700">
+              <span className="font-medium">Role:</span> {form.role}
+            </p>
+            <p className="text-gray-700">
+              <span className="font-medium">Help with:</span> {helpSummary()}
+            </p>
+            <p className="text-gray-700">
+              <span className="font-medium">Contact via:</span>{" "}
+              {form.contactMethod}
+            </p>
+            <p className="text-gray-700">
+              <span className="font-medium">Best time:</span> {form.bestTime}
+            </p>
+            <p className="text-gray-700">
+              <span className="font-medium">Notes:</span> {form.notes}
+            </p>
           </div>
 
           <button
             className="py-3 px-8 rounded-xl font-medium text-white"
             style={{ background: BRAND }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = BRAND_HOVER)}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.background = BRAND_HOVER)
+            }
             onMouseLeave={(e) => (e.currentTarget.style.background = BRAND)}
             onClick={() => {
               setSubmitted(false);
               setStep(1);
               setErrors({});
               setForm({
-                firstName: "", email: "", phone: "", role: "",
-                helpWith: [], otherHelp: "", contactMethod: "",
-                bestTime: "", notes: "",
+                firstName: "",
+                email: "",
+                phone: "",
+                role: "",
+                helpWith: [],
+                otherHelp: "",
+                contactMethod: "",
+                bestTime: "",
+                notes: "",
               });
             }}
           >
@@ -263,9 +290,8 @@ export default function Registration() {
 
   // ── Form ───────────────────────────────────────────────────────────────────
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center mb-20">
       <div className="bg-white p-10 rounded-2xl shadow-lg w-full max-w-2xl">
-
         {/* STEP INDICATOR */}
         <div className="mb-6 flex justify-between">
           {[1, 2, 3].map((num) => (
@@ -273,9 +299,9 @@ export default function Registration() {
               <div
                 className="w-10 h-10 rounded-full flex items-center justify-center font-semibold"
                 style={{
-                  background:    step >= num ? BRAND : "#E5E7EB",
-                  color:         step >= num ? "#fff" : "#6B7280",
-                  outline:       step === num ? `4px solid ${BRAND_RING}` : "none",
+                  background: step >= num ? BRAND : "#E5E7EB",
+                  color: step >= num ? "#fff" : "#6B7280",
+                  outline: step === num ? `4px solid ${BRAND_RING}` : "none",
                   outlineOffset: "2px",
                 }}
               >
@@ -335,13 +361,17 @@ export default function Registration() {
               onChange={(e) => setForm({ ...form, phone: e.target.value })}
             />
             {phoneErr ? (
-              <p className={errMsg}>Please enter a valid phone number (10–15 digits).</p>
+              <p className={errMsg}>
+                Please enter a valid phone number (10–15 digits).
+              </p>
             ) : (
               <div className="mb-3" />
             )}
 
             <button
-              onClick={() => { if (isStep1Valid()) setStep(2); }}
+              onClick={() => {
+                if (isStep1Valid()) setStep(2);
+              }}
               disabled={!isStep1Valid()}
               className="w-full py-3 rounded-xl font-medium mt-1"
               style={primaryBtn(isStep1Valid())}
@@ -358,16 +388,18 @@ export default function Registration() {
               What best describes you? <span className="text-red-500">*</span>
             </p>
             <div className="grid grid-cols-2 gap-3 mb-6">
-              {(["Student", "Parent", "Educator", "Other"] as const).map((role) => (
-                <button
-                  key={role}
-                  onClick={() => setForm({ ...form, role })}
-                  className="p-4 rounded-xl text-sm font-medium"
-                  style={toggleBtn(form.role === role)}
-                >
-                  {role}
-                </button>
-              ))}
+              {(["Student", "Parent", "Educator", "Other"] as const).map(
+                (role) => (
+                  <button
+                    key={role}
+                    onClick={() => setForm({ ...form, role })}
+                    className="p-4 rounded-xl text-sm font-medium"
+                    style={toggleBtn(form.role === role)}
+                  >
+                    {role}
+                  </button>
+                ),
+              )}
             </div>
 
             <div className="flex gap-3">
@@ -378,7 +410,9 @@ export default function Registration() {
                 Back
               </button>
               <button
-                onClick={() => { if (isStep2Valid()) setStep(3); }}
+                onClick={() => {
+                  if (isStep2Valid()) setStep(3);
+                }}
                 disabled={!isStep2Valid()}
                 className="w-1/2 py-3 rounded-xl font-medium"
                 style={primaryBtn(isStep2Valid())}
@@ -396,11 +430,19 @@ export default function Registration() {
               What can I help you with? <span className="text-red-500">*</span>
             </p>
             <div className="grid grid-cols-2 gap-2 mb-1">
-              {([
-                "College Applications", "Essay Help", "Choosing Colleges",
-                "Choosing a Major", "Extracurricular Planning", "SAT Tutoring",
-                "Academic Counseling", "Interview Prep", "Other",
-              ] as const).map((item) => (
+              {(
+                [
+                  "College Applications",
+                  "Essay Help",
+                  "Choosing Colleges",
+                  "Choosing a Major",
+                  "Extracurricular Planning",
+                  "SAT Tutoring",
+                  "Academic Counseling",
+                  "Interview Prep",
+                  "Other",
+                ] as const
+              ).map((item) => (
                 <button
                   key={item}
                   onClick={() => toggleHelpWith(item)}
@@ -418,29 +460,47 @@ export default function Registration() {
                 className={`${inputBase} mb-4 mt-2`}
                 placeholder="Please specify..."
                 value={form.otherHelp}
-                onChange={(e) => setForm({ ...form, otherHelp: e.target.value })}
+                onChange={(e) =>
+                  setForm({ ...form, otherHelp: e.target.value })
+                }
               />
             )}
 
             <p className="text-sm font-medium text-gray-700 mb-2 mt-3">
-              Preferred method of contact <span className="text-red-500">*</span>
+              Preferred method of contact{" "}
+              <span className="text-red-500">*</span>
             </p>
-            <div className="grid grid-cols-3 gap-2 mb-1">
-              {(["Phone Call", "Text Message", "Email"] as const).map((method) => (
-                <button
-                  key={method}
-                  onClick={() => {
-                    setErrors((prev) => ({ ...prev, contactMethod: undefined }));
-                    setForm({ ...form, contactMethod: method });
-                  }}
-                  className="p-2 rounded-xl text-xs font-medium"
-                  style={toggleBtn(form.contactMethod === method)}
-                >
-                  {method}
-                </button>
-              ))}
+            <div className="flex gap-6">
+              {(["Phone Call", "Text Message", "Email"] as const).map(
+                (method) => (
+                  <label
+                    key={method}
+                    className="flex items-center gap-3 cursor-pointer"
+                  >
+                    <input
+                      type="radio"
+                      name="contactMethod"
+                      value={method}
+                      checked={form.contactMethod === method}
+                      onChange={() => {
+                        setErrors((prev) => ({
+                          ...prev,
+                          contactMethod: undefined,
+                        }));
+                        setForm({ ...form, contactMethod: method });
+                      }}
+                      className="w-4 h-4 accent-[#2e2a79]"
+                    />
+                    <span className="text-sm font-medium text-gray-700">
+                      {method}
+                    </span>
+                  </label>
+                ),
+              )}
             </div>
-            {errors.contactMethod && <p className={errMsg}>{errors.contactMethod}</p>}
+            {errors.contactMethod && (
+              <p className={errMsg}>{errors.contactMethod}</p>
+            )}
 
             <p className="text-sm font-medium text-gray-700 mb-2 mt-3">
               Best time to reach you <span className="text-red-500">*</span>
@@ -454,7 +514,8 @@ export default function Registration() {
             {errors.bestTime && <p className={errMsg}>{errors.bestTime}</p>}
 
             <p className="text-sm font-medium text-gray-700 mb-2 mt-3">
-              Anything else I should know <span className="text-red-500">*</span>
+              Anything else I should know{" "}
+              <span className="text-red-500">*</span>
             </p>
             <textarea
               className="w-full p-4 border rounded-xl h-28 mb-1 focus:outline-none transition"
@@ -482,7 +543,6 @@ export default function Registration() {
             </div>
           </>
         )}
-
       </div>
     </div>
   );

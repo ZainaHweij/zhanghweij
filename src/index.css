@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -7,33 +7,33 @@
 @layer base {
   :root {
     /* backgrounds */
-    --background: 0 0% 100%;               /* white */
-    --foreground: 0 0% 0%;                 /* black */
+    --background: 0 0% 100%; /* white */
+    --foreground: 0 0% 0%; /* black */
 
-    --card: 0 0% 100%;                     /* white */
-    --card-foreground: 0 0% 0%;            /* black */
+    --card: 0 0% 100%; /* white */
+    --card-foreground: 0 0% 0%; /* black */
 
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 0%;
 
     /* primary = black (navbar bg, footer bg, buttons) */
     --primary: 0 0% 0%;
-    --primary-foreground: 0 0% 100%;       /* white text on black */
+    --primary-foreground: 0 0% 100%; /* white text on black */
 
     /* secondary = #2e2a79 purple */
     --secondary: 243 48% 32%;
-    --secondary-foreground: 0 0% 100%;     /* white text on purple */
+    --secondary-foreground: 0 0% 100%; /* white text on purple */
 
-    --muted: 220 14% 96%;                  /* gray-100 */
-    --muted-foreground: 0 0% 40%;          /* mid-grey text */
+    --muted: 220 14% 96%; /* gray-100 */
+    --muted-foreground: 0 0% 40%; /* mid-grey text */
 
     /* accent = purple */
     --accent: 243 48% 32%;
     --accent-foreground: 0 0% 100%;
 
-    --border: 0 0% 88%;                    /* light grey border */
+    --border: 0 0% 88%; /* light grey border */
     --input: 0 0% 88%;
-    --ring: 243 48% 32%;                   /* purple focus ring */
+    --ring: 243 48% 32%; /* purple focus ring */
 
     --radius: 0.625rem;
   }
@@ -44,11 +44,24 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: ui-sans-serif, system-ui, -apple-system, "Inter", sans-serif;
+    font-family:
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      "Inter",
+      sans-serif;
   }
 
-  h1, h2, h3, h4 {
-    font-family: ui-sans-serif, system-ui, -apple-system, "Inter", sans-serif;
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family:
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      "Inter",
+      sans-serif;
     letter-spacing: -0.02em;
   }
 }
@@ -64,8 +77,12 @@
 }
 
 @keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(calc(-1 * var(--scroll-width))); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-1 * var(--scroll-width)));
+  }
 }
 
 .animate-marquee {
