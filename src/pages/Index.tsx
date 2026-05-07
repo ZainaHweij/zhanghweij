@@ -57,7 +57,7 @@ const Index = () => {
       </section>
 
       {/* REGISTRATION */}
-      <section className="bg-gray-100">
+      <section>
         <div className="container mx-auto px-4">
           <AboutMe />
           <Registration />

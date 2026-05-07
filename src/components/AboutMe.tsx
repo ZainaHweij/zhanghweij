@@ -80,15 +80,15 @@ function Ticker({ items }: { items: string[] }) {
 
   return (
     <div className="overflow-hidden w-full relative">
-      <div className="absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-gray-100 to-transparent z-10 pointer-events-none" />
-      <div className="absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-gray-100 to-transparent z-10 pointer-events-none" />
+      <div className="absolute inset-y-0 left-0 w-10 z-10 pointer-events-none" />
+      <div className="absolute inset-y-0 right-0 w-10  z-10 pointer-events-none" />
       <div ref={ref} className="flex w-max py-1">
         {all.map((item, i) => (
           <span
             key={i}
             className="inline-flex items-center gap-2 px-4 whitespace-nowrap text-xs uppercase tracking-widest font-medium text-gray-500"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-gray-400 flex-shrink-0" />
+            <span className="w-1.5 h-1.5 rounded-full  flex-shrink-0" />
             {item}
           </span>
         ))}
@@ -114,7 +114,7 @@ function ConsultantRow({
     >
       {/* Photo */}
       <div className="flex-shrink-0">
-        <div className="w-64 h-80 rounded-2xl overflow-hidden bg-gray-200">
+        <div className="w-64 h-80 rounded-2xl overflow-hidden ">
           <img
             src={consultant.image}
             alt={consultant.name}
@@ -135,11 +135,11 @@ function ConsultantRow({
         </p>
 
         <div className="flex items-center gap-3 mt-1">
-          <div className="h-px flex-1 bg-gray-200" />
+          <div className="h-px flex-1 " />
           <span className="text-xs uppercase tracking-widest text-gray-400 font-medium">
             Highlights
           </span>
-          <div className="h-px flex-1 bg-gray-200" />
+          <div className="h-px flex-1 " />
         </div>
 
         <div className="w-full overflow-hidden">
@@ -173,7 +173,7 @@ function CategorySection({
 }
 
 const AboutMe = () => (
-  <section className="bg-gray-100 py-20">
+  <section className=" py-20">
     <div className="container mx-auto max-w-6xl px-4">
       <div className="mb-8">
         <h2 className="text-4xl md:text-6xl font-bold text-secondary mb-2">
