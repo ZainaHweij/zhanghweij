@@ -7,6 +7,7 @@ import heroGround from "@/assets/heroground.png";
 import FlippingCards from "@/components/FlippingCards";
 import Registration from "@/components/Registration";
 import AboutMe from "@/components/AboutMe";
+import PricingComponent from "@/components/PricingComponent";
 
 const Index = () => {
   return (
@@ -60,11 +61,10 @@ const Index = () => {
       <section>
         <div className="container mx-auto px-4">
           <AboutMe />
+          <PricingComponent />
           <Registration />
         </div>
       </section>
-
-      {/* ABOUT */}
 
       <Footer />
     </div>
