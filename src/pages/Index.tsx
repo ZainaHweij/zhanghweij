@@ -8,6 +8,7 @@ import FlippingCards from "@/components/FlippingCards";
 import Registration from "@/components/Registration";
 import AboutMe from "@/components/AboutMe";
 import PricingComponent from "@/components/PricingComponent";
+import Help from "@/components/Help";
 
 const Index = () => {
   return (
