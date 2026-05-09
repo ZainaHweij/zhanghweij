@@ -1,145 +1,95 @@
 import { useState } from "react";
 
-const services = [
-  "SATs",
+const CARD_DATA = [
+  "SAT Prep",
   "College Counseling",
   "Extracurriculars",
   "Research Mentorship",
   "Science Olympiad",
   "ISEF Tutoring",
-];
+  "AP Prep",
+  "Essay Writing",
+  "STEM Projects",
+  "Leadership",
+  "Mock Interviews",
+  "Math Tutoring",
+  "Physics Help",
+  "Debate Coaching",
+  "Creative Writing",
+  "Medical School Prep",
+  "Language Learning",
+  "Coding Bootcamp",
+].map((text, i) => ({
+  id: i + 1,
+  text,
+}));
 
-export default function Help() {
-  const [cards, setCards] = useState([
-    {
-      id: 1,
-      text: "SATs",
-      x: 80,
-      y: 140,
-      rotate: -10,
-    },
-    {
-      id: 2,
-      text: "College Counseling",
-      x: 860,
-      y: 120,
-      rotate: 35,
-    },
-    {
-      id: 3,
-      text: "Extracurriculars",
-      x: 460,
-      y: 110,
-      rotate: 8,
-    },
-    {
-      id: 4,
-      text: "Research Mentorship",
-      x: 230,
-      y: 380,
-      rotate: 10,
-    },
-    {
-      id: 5,
-      text: "Science Olympiad",
-      x: 760,
-      y: 420,
-      rotate: 0,
-    },
-    {
-      id: 6,
-      text: "ISEF Tutoring",
-      x: 610,
-      y: 280,
-      rotate: -24,
-    },
-  ]);
+const BOX = { w: 1300, h: 500 };
+const CARD = { w: 170, h: 60 };
 
-  const shuffleCards = () => {
-    const CARD_WIDTH = 320;
-    const CARD_HEIGHT = 95;
+const CENTER_BLOCK = {
+  x: BOX.w / 2 - 240,
+  y: BOX.h / 2 - 140,
+  w: 480,
+  h: 280,
+};
 
-    const BOX_WIDTH = 1300;
-    const BOX_HEIGHT = 500;
+const isColliding = (a, b) =>
+  a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
 
-    const placed = [];
+// STRICT no-overlap generator
+function generateLayout() {
+  const placed = [];
 
-    const newCards = cards.map((card) => {
-      let valid = false;
-      let attempts = 0;
+  return CARD_DATA.map((card) => {
+    let attempts = 0;
+    let rect;
 
-      let newX = 0;
-      let newY = 0;
-
-      while (!valid && attempts < 200) {
-        newX = Math.random() * (BOX_WIDTH - CARD_WIDTH);
-        newY = Math.random() * (BOX_HEIGHT - CARD_HEIGHT);
-
-        valid = true;
-
-        for (const p of placed) {
-          const overlap =
-            newX < p.x + CARD_WIDTH &&
-            newX + CARD_WIDTH > p.x &&
-            newY < p.y + CARD_HEIGHT &&
-            newY + CARD_HEIGHT > p.y;
-
-          if (overlap) {
-            valid = false;
-            break;
-          }
-        }
-
-        attempts++;
-      }
-
-      const updated = {
-        ...card,
-        x: newX,
-        y: newY,
-        rotate: Math.random() * 50 - 25,
+    while (attempts < 3000) {
+      rect = {
+        x: Math.random() * (BOX.w - CARD.w),
+        y: Math.random() * (BOX.h - CARD.h),
+        w: CARD.w,
+        h: CARD.h,
       };
 
-      placed.push(updated);
+      const hitsCenter = isColliding(rect, CENTER_BLOCK);
+      const hitsOther = placed.some((p) => isColliding(rect, p));
 
-      return updated;
-    });
+      if (!hitsCenter && !hitsOther) break;
 
-    setCards(newCards);
+      attempts++;
+    }
+
+    placed.push(rect);
+
+    return {
+      ...card,
+      x: rect.x,
+      y: rect.y,
+      rotate: Math.random() * 50 - 25,
+    };
+  });
+}
+
+export default function Help() {
+  const [cards, setCards] = useState(() => generateLayout());
+
+  const shuffle = () => {
+    setCards(generateLayout());
   };
 
   return (
-    <div className="w-full py-20 flex flex-col items-center">
-      <h1 className="text-7xl font-bold mb-16 text-center">
-        Things we can help with
-      </h1>
-
+    <div className="w-full flex justify-center py-20">
       <div
-        className="relative w-[1300px] h-[500px] rounded-3xl "
-        onClick={shuffleCards}
+        onClick={shuffle}
+        className="relative w-[1300px] h-[500px] overflow-hidden cursor-pointer"
       >
+        {/* Cards */}
         {cards.map((card) => (
           <div
             key={card.id}
-            className="
-              absolute
-              w-[320px]
-              h-[95px]
-              bg-black
-              rounded-sm
-              flex
-              items-center
-              justify-center
-              text-white
-              text-3xl
-              font-medium
-              cursor-pointer
-              select-none
-              transition-all
-              duration-700
-              ease-in-out
-              shadow-xl
-            "
+            className="absolute w-[170px] h-[60px] bg-black text-white text-sm font-medium rounded-md flex items-center justify-center shadow-xl transition-all duration-700"
             style={{
               left: card.x,
               top: card.y,
@@ -149,9 +99,14 @@ export default function Help() {
             {card.text}
           </div>
         ))}
-      </div>
 
-      <p className="text-sm text-black/50 mt-6">Click anywhere in the box</p>
+        {/* Center Title */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div className="text-center bg-white px-10 py-5 rounded-xl shadow-md">
+            <div className="text-5xl font-semibold">What we help with</div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

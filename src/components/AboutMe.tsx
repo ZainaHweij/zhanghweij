@@ -186,12 +186,12 @@ const AboutMe = () => (
 
       <div className="flex flex-col gap-8">
         <CategorySection
-          title="SHOOTING FOR THE TOP?"
+          title="Shooting for the top?"
           subtitle="We understand what it takes to get there"
           consultant={consultants[0]}
         />
         <CategorySection
-          title="OR MAYBE YOU'RE COMPLETELY LOST"
+          title="Or maybe you're completely lost?"
           subtitle="It's not too late at all"
           consultant={consultants[1]}
         />

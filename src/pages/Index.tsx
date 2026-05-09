@@ -61,6 +61,7 @@ const Index = () => {
       {/* REGISTRATION */}
       <section>
         <div className="container mx-auto px-4">
+          <Help />
           <AboutMe />
           <PricingComponent />
           <Registration />
