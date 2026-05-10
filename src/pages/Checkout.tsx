@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import PricingFlat from "@/components/PricingFlat";
 import Questions from "@/components/Questions";
 
-const Pricing = () => {
+const Checkout = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
@@ -23,4 +23,4 @@ const Pricing = () => {
   );
 };
 
-export default Pricing;
+export default Checkout;

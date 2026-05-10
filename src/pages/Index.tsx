@@ -47,7 +47,7 @@ const Index = () => {
                   size="lg"
                   className="bg-white text-black hover:bg-white/90 font-medium w-full sm:w-auto"
                 >
-                  <Link to="/pricing">
+                  <Link to="/checkout">
                     Schedule a Free Call{" "}
                     <ArrowRight className="ml-1" size={18} />
                   </Link>
@@ -72,14 +72,12 @@ const Index = () => {
       </section>
 
       {/* CONTENT */}
-      <section id="services">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <Help />
-          <AboutMe />
-          <PricingComponent />
-          <Registration />
-        </div>
-      </section>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <Help />
+        <AboutMe />
+        <PricingComponent />
+        <Registration />
+      </div>
 
       <Footer />
     </div>

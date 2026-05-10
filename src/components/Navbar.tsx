@@ -11,7 +11,7 @@ const Navbar = () => {
   const links = [
     { label: "Home", to: "/" },
     { label: "Services", to: "/services" },
-    { label: "Pricing", to: "/pricing" },
+    { label: "Checkout", to: "/checkout" },
   ];
 
   const isActive = (to) => location.pathname === to;
@@ -47,7 +47,7 @@ const Navbar = () => {
             size="sm"
             className="bg-foreground text-background hover:bg-foreground/90 font-medium"
           >
-            <Link to="/pricing">Get Started</Link>
+            <Link to="/checkout">Get Started</Link>
           </Button>
         </div>
 
@@ -81,7 +81,7 @@ const Navbar = () => {
             size="sm"
             className="w-full bg-foreground text-background hover:bg-foreground/90"
           >
-            <Link to="/pricing" onClick={() => setOpen(false)}>
+            <Link to="/checkout" onClick={() => setOpen(false)}>
               Get Started
             </Link>
           </Button>
