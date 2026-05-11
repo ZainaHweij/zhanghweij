@@ -47,6 +47,7 @@ function PaymentForm({ plan }: { plan: (typeof plans)[0] }) {
   const elements = useElements();
   const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const [ready, setReady] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -86,7 +87,10 @@ function PaymentForm({ plan }: { plan: (typeof plans)[0] }) {
         </p>
       </div>
 
-      <PaymentElement options={{ layout: "tabs" }} />
+      <PaymentElement
+        options={{ layout: "tabs" }}
+        onReady={() => setReady(true)}
+      />
 
       {status === "error" && (
         <p className="text-xs text-red-500 bg-red-50 border border-red-100 rounded-xl px-4 py-3">
@@ -96,7 +100,7 @@ function PaymentForm({ plan }: { plan: (typeof plans)[0] }) {
 
       <button
         type="submit"
-        disabled={!stripe || status === "loading"}
+        disabled={!stripe || !elements || !ready || status === "loading"}
         className="
           w-full mt-1 rounded-2xl py-4 font-semibold text-sm tracking-wide
           bg-zinc-900 text-white
@@ -128,6 +132,8 @@ function PaymentForm({ plan }: { plan: (typeof plans)[0] }) {
 }
 
 export default function Checkout() {
+  console.log("Checkout mounted");
+
   const [selected, setSelected] = useState(plans[1]);
   const [clientSecret, setClientSecret] = useState<string | null>(null);
   const [fetchError, setFetchError] = useState(false);
@@ -147,38 +153,32 @@ export default function Checkout() {
   }, [selected.key]);
 
   return (
-    <div>
+    <div className="min-h-screen bg-zinc-50 flex flex-col">
+      <style>{`@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Serif+Display&display=swap');`}</style>
+
       <Navbar />
-      <div
-        className="min-h-screen bg-zinc-50 flex flex-col"
-        style={{ fontFamily: "'DM Sans', sans-serif" }}
-      >
-        <style>{`@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Serif+Display&display=swap');`}</style>
 
-        <main className="flex-1 flex items-start justify-center px-4 pt-28 pb-14">
-          <div className="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-8 items-start">
-            {/* LEFT: Plan selector */}
-            <div className="flex flex-col gap-5">
-              <div>
-                <p className="text-xs font-semibold tracking-[0.15em] uppercase text-zinc-400 mb-2">
-                  Choose your plan
-                </p>
-                <h1
-                  className="text-3xl font-bold text-zinc-900 leading-tight"
-                  style={{ fontFamily: "'DM Serif Display', serif" }}
-                >
-                  Invest in your growth.
-                </h1>
-              </div>
+      <main className="flex-1 flex items-start justify-center px-4 pt-28 pb-14">
+        <div className="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-8 items-start">
+          {/* LEFT: Plan selector */}
+          <div className="flex flex-col gap-5">
+            <div>
+              <p className="text-xs font-semibold tracking-[0.15em] uppercase text-zinc-400 mb-2">
+                Choose your plan
+              </p>
+              <h1 className="text-3xl font-bold text-zinc-900 leading-tight">
+                Invest in your growth.
+              </h1>
+            </div>
 
-              <div className="flex flex-col gap-3 mt-1">
-                {plans.map((plan) => {
-                  const active = selected.key === plan.key;
-                  return (
-                    <button
-                      key={plan.key}
-                      onClick={() => setSelected(plan)}
-                      className={`
+            <div className="flex flex-col gap-3 mt-1">
+              {plans.map((plan) => {
+                const active = selected.key === plan.key;
+                return (
+                  <button
+                    key={plan.key}
+                    onClick={() => setSelected(plan)}
+                    className={`
                       relative w-full text-left rounded-2xl border p-5
                       transition-all duration-200 group
                       ${
@@ -187,152 +187,154 @@ export default function Checkout() {
                           : "bg-white border-zinc-200 hover:border-zinc-400"
                       }
                     `}
-                    >
-                      {plan.popular && (
-                        <span
-                          className={`
+                  >
+                    {plan.popular && (
+                      <span
+                        className={`
                           absolute top-4 right-4 text-[10px] font-semibold tracking-widest uppercase
                           px-2.5 py-1 rounded-full
                           ${active ? "bg-white/15 text-white" : "bg-zinc-900 text-white"}
                         `}
+                      >
+                        Most popular
+                      </span>
+                    )}
+
+                    <div className="flex items-start justify-between pr-24">
+                      <div>
+                        <p
+                          className={`text-base font-semibold ${active ? "text-white" : "text-zinc-900"}`}
                         >
-                          Most popular
+                          {plan.name} Plan
+                        </p>
+                        <p className="text-xs mt-0.5 text-zinc-400">
+                          {plan.tagline}
+                        </p>
+                      </div>
+                      <div className="text-right shrink-0">
+                        <span
+                          className={`text-2xl font-bold ${active ? "text-white" : "text-zinc-900"}`}
+                        >
+                          {plan.label}
                         </span>
-                      )}
-
-                      <div className="flex items-start justify-between pr-24">
-                        <div>
-                          <p
-                            className={`text-base font-semibold ${active ? "text-white" : "text-zinc-900"}`}
-                          >
-                            {plan.name} Plan
-                          </p>
-                          <p className="text-xs mt-0.5 text-zinc-400">
-                            {plan.tagline}
-                          </p>
-                        </div>
-                        <div className="text-right shrink-0">
-                          <span
-                            className={`text-2xl font-bold ${active ? "text-white" : "text-zinc-900"}`}
-                          >
-                            {plan.label}
-                          </span>
-                          <span className="text-xs ml-1 text-zinc-400">
-                            {plan.billing}
-                          </span>
-                        </div>
+                        <span className="text-xs ml-1 text-zinc-400">
+                          {plan.billing}
+                        </span>
                       </div>
+                    </div>
 
-                      <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2">
-                        {plan.features.map((f) => (
-                          <div key={f} className="flex items-center gap-2">
-                            <div
-                              className={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 ${
-                                active ? "bg-white/20" : "bg-zinc-100"
-                              }`}
-                            >
-                              <Check
-                                size={9}
-                                strokeWidth={3}
-                                className={
-                                  active ? "text-white" : "text-zinc-700"
-                                }
-                              />
-                            </div>
-                            <span
-                              className={`text-xs ${active ? "text-zinc-300" : "text-zinc-500"}`}
-                            >
-                              {f}
-                            </span>
+                    <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2">
+                      {plan.features.map((f) => (
+                        <div key={f} className="flex items-center gap-2">
+                          <div
+                            className={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 ${
+                              active ? "bg-white/20" : "bg-zinc-100"
+                            }`}
+                          >
+                            <Check
+                              size={9}
+                              strokeWidth={3}
+                              className={
+                                active ? "text-white" : "text-zinc-700"
+                              }
+                            />
                           </div>
-                        ))}
-                      </div>
+                          <span
+                            className={`text-xs ${active ? "text-zinc-300" : "text-zinc-500"}`}
+                          >
+                            {f}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
 
-                      <div
-                        className={`
+                    <div
+                      className={`
                         absolute left-5 bottom-4 w-4 h-4 rounded-full border-2 transition-all
                         ${active ? "border-white" : "border-zinc-300 group-hover:border-zinc-500"}
                       `}
-                      >
-                        {active && (
-                          <div className="absolute inset-0.5 rounded-full bg-white" />
-                        )}
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-
-              {/* Trust badges */}
-              <div className="grid grid-cols-3 gap-3 mt-1">
-                {[
-                  { stat: "Cancel anytime", sub: "No lock-in" },
-                  { stat: "Same-day setup", sub: "Start immediately" },
-                  { stat: "Money-back", sub: "If unsatisfied" },
-                ].map((t) => (
-                  <div
-                    key={t.stat}
-                    className="rounded-2xl border border-zinc-200 bg-white px-4 py-3 text-center"
-                  >
-                    <p className="text-xs font-semibold text-zinc-900">
-                      {t.stat}
-                    </p>
-                    <p className="text-[11px] text-zinc-400 mt-0.5">{t.sub}</p>
-                  </div>
-                ))}
-              </div>
+                    >
+                      {active && (
+                        <div className="absolute inset-0.5 rounded-full bg-white" />
+                      )}
+                    </div>
+                  </button>
+                );
+              })}
             </div>
 
-            {/* RIGHT: Payment panel */}
-            <div className="bg-white rounded-3xl border border-zinc-200 shadow-sm p-8 sticky top-24">
-              <h2 className="text-base font-semibold text-zinc-900 mb-1">
-                Payment details
-              </h2>
-              <p className="text-xs text-zinc-400 mb-6">
-                You'll be charged for the{" "}
-                <span className="font-medium text-zinc-600">
-                  {selected.name} Plan
-                </span>
-                .
-              </p>
-
-              {fetchError ? (
-                <div className="text-xs text-red-500 bg-red-50 border border-red-100 rounded-xl px-4 py-3">
-                  Couldn't reach payment server. Make sure{" "}
-                  <code className="font-mono">server.js</code> is running on
-                  port 3001.
-                </div>
-              ) : clientSecret ? (
-                <Elements
-                  stripe={stripePromise}
-                  options={{
-                    clientSecret,
-                    appearance: {
-                      theme: "stripe",
-                      variables: {
-                        colorPrimary: "#18181b",
-                        colorBackground: "#ffffff",
-                        borderRadius: "12px",
-                        fontFamily: "DM Sans, sans-serif",
-                        spacingUnit: "4px",
-                      },
-                    },
-                  }}
+            {/* Trust badges */}
+            <div className="grid grid-cols-3 gap-3 mt-1">
+              {[
+                { stat: "Cancel anytime", sub: "No lock-in" },
+                { stat: "Same-day setup", sub: "Start immediately" },
+                { stat: "Money-back", sub: "If unsatisfied" },
+              ].map((t) => (
+                <div
+                  key={t.stat}
+                  className="rounded-2xl border border-zinc-200 bg-white px-4 py-3 text-center"
                 >
-                  <PaymentForm plan={selected} />
-                </Elements>
-              ) : (
-                <div className="flex flex-col gap-4 animate-pulse">
-                  <div className="h-10 rounded-xl bg-zinc-100" />
-                  <div className="h-28 rounded-xl bg-zinc-100" />
-                  <div className="h-12 rounded-xl bg-zinc-100" />
-                  <div className="h-12 rounded-xl bg-zinc-100" />
+                  <p className="text-xs font-semibold text-zinc-900">
+                    {t.stat}
+                  </p>
+                  <p className="text-[11px] text-zinc-400 mt-0.5">{t.sub}</p>
                 </div>
-              )}
+              ))}
             </div>
           </div>
-        </main>
-      </div>
+
+          {/* RIGHT: Payment panel */}
+          <div className="bg-white rounded-3xl border border-zinc-200 shadow-sm p-8 sticky top-24">
+            <h2 className="text-base font-semibold text-zinc-900 mb-1">
+              Payment details
+            </h2>
+            <p className="text-xs text-zinc-400 mb-6">
+              You'll be charged for the{" "}
+              <span className="font-medium text-zinc-600">
+                {selected.name} Plan
+              </span>
+              .
+            </p>
+
+            {fetchError ? (
+              <div className="text-xs text-red-500 bg-red-50 border border-red-100 rounded-xl px-4 py-3">
+                Couldn't reach payment server. Make sure{" "}
+                <code className="font-mono">server.js</code> is running on port
+                3001.
+              </div>
+            ) : clientSecret ? (
+              // key={clientSecret} forces a full remount when the secret changes
+              // so Stripe reinitializes cleanly on plan switch
+              <Elements
+                key={clientSecret}
+                stripe={stripePromise}
+                options={{
+                  clientSecret,
+                  appearance: {
+                    theme: "stripe",
+                    variables: {
+                      colorPrimary: "#18181b",
+                      colorBackground: "#ffffff",
+                      borderRadius: "12px",
+                      fontFamily: "DM Sans, sans-serif",
+                      spacingUnit: "4px",
+                    },
+                  },
+                }}
+              >
+                <PaymentForm plan={selected} />
+              </Elements>
+            ) : (
+              <div className="flex flex-col gap-4 animate-pulse">
+                <div className="h-10 rounded-xl bg-zinc-100" />
+                <div className="h-28 rounded-xl bg-zinc-100" />
+                <div className="h-12 rounded-xl bg-zinc-100" />
+                <div className="h-12 rounded-xl bg-zinc-100" />
+              </div>
+            )}
+          </div>
+        </div>
+      </main>
     </div>
   );
 }
