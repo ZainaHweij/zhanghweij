@@ -15,9 +15,8 @@ const consultants: Consultant[] = [
     name: "Zaina Hweij",
     role: "College Admissions Consultant",
     image: hweij,
-    bio: 'Zaina is an incoming Duke bioengineering student who combined academic excellence with a highly intentional pursuit of unconventional, engineering-focused experiences throughout high school. She manually sought and developed PhD-level mentorship connections, selective extracurricular involvement, and competitive achievements that truly excited academic interest compared to stereotypical STEM extracurriculars. A strong writer, her Common App personal statement was described by her AP teacher as "one of the best, most profound ones I\'ve ever read," adding that it "really sang." She helps students refine their story and focus their energy on their work rather than endlessly cold emailing for broad opportunity.',
+    bio: "Growing up as a first-generation immigrant, I learned to find my own seat at the table. Starting in middle school, I emailed my way into higher-level math classes and selective robotics and science clubs. By high school, I grew these opportunities into award-winning research, cited papers, PhD-level mentorship and connections, and competitive achievements that truly excited academic interest beyond stereotypical STEM extracurriculars. My experience writing scientific papers has allowed me to take a structured approach to crafting personal statements that as my AP teacher described, were “the best, most profound essays I’ve ever read.” I’m here to help you focus your energy on refining your story and gaining tangible opportunities rather than blindly cold emailing.",
     achievements: [
-      "UW Neuroscience Direct Admit — <10 Seats State-Wide",
       "Duke RD Admit — 3.7%",
       "National Merit Finalist",
       "OHSU PSI Alumna — 25% Acceptance",
@@ -34,7 +33,7 @@ const consultants: Consultant[] = [
     name: "Sophie Zhang",
     role: "College Admissions Consultant",
     image: zhang,
-    bio: "Sophie is an incoming Northwestern student who began high school without a clear academic direction, limited involvement, and little initial focus on her studies. Starting near the bottom of several classes, she gradually rebuilt her trajectory by independently seeking guidance from teachers, mentors, alumni, and professionals, and applying that insight to her own development. Over time, she clarified her interest in healthcare, connected it to meaningful leadership and internship opportunities, and learned how to strategically present her experiences. Having taken a non-linear path herself, she now helps students approach the college admissions process with greater clarity, structure, and confidence.",
+    bio: "I started high school with no clear interests, no extracurriculars, and no idea on how the college admissions process worked. Over the next four years, I compiled advice from teachers, mentors, and alumni to build my application from the ground-up. I got a clearer idea of my healthcare interests, connected them to leadership and internship opportunities, and learned how to effectively pitch myself. I’ve been fortunate to be accepted into selective summer programs (~2% acceptance), earn tens of thousands of scholarship dollars, and gain admission to T10 universities like Northwestern. Beyond myself, I’ve helped students design and lead their own workshops, gain admission to graduate-level programs, and conduct research that was awarded Thermo Fisher qualification (top 10% of researchers). I took the long way—now I’m here to make the process stress-free for you.",
     achievements: [
       "UW — Honors College, Full Ride",
       "Georgia Tech — $40K Scholarship",
