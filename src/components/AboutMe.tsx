@@ -81,14 +81,14 @@ function Ticker({ items }: { items: string[] }) {
   return (
     <div className="overflow-hidden w-full relative">
       <div className="absolute inset-y-0 left-0 w-10 z-10 pointer-events-none" />
-      <div className="absolute inset-y-0 right-0 w-10  z-10 pointer-events-none" />
+      <div className="absolute inset-y-0 right-0 w-10 z-10 pointer-events-none" />
       <div ref={ref} className="flex w-max py-1">
         {all.map((item, i) => (
           <span
             key={i}
             className="inline-flex items-center gap-2 px-4 whitespace-nowrap text-xs uppercase tracking-widest font-medium text-gray-500"
           >
-            <span className="w-1.5 h-1.5 rounded-full  flex-shrink-0" />
+            <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" />
             {item}
           </span>
         ))}
@@ -96,6 +96,73 @@ function Ticker({ items }: { items: string[] }) {
     </div>
   );
 }
+
+// ─── MOBILE LAYOUT ────────────────────────────────────────────────────────────
+
+function MobileConsultantCard({
+  consultant,
+  imgPosition = "object-top",
+}: {
+  consultant: Consultant;
+  imgPosition?: string;
+}) {
+  return (
+    <div className="flex flex-col gap-3">
+      <div className="flex items-center gap-3">
+        <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 ring-2 ring-gray-200">
+          <img
+            src={consultant.image}
+            alt={consultant.name}
+            className={`w-full h-full object-cover ${imgPosition}`}
+          />
+        </div>
+        <div>
+          <h3 className="text-lg font-semibold text-gray-900 leading-tight">
+            {consultant.name}
+          </h3>
+          <p className="text-xs text-gray-500 uppercase tracking-wide">
+            {consultant.role}
+          </p>
+        </div>
+      </div>
+      <p className="text-sm leading-relaxed text-gray-700">{consultant.bio}</p>
+      <div className="flex items-center gap-3">
+        <div className="h-px flex-1 bg-gray-200" />
+        <span className="text-xs uppercase tracking-widest text-gray-400 font-medium">
+          Highlights
+        </span>
+        <div className="h-px flex-1 bg-gray-200" />
+      </div>
+      <div className="w-full overflow-hidden">
+        <Ticker items={consultant.achievements} />
+      </div>
+    </div>
+  );
+}
+
+function MobileCategorySection({
+  title,
+  subtitle,
+  consultant,
+  imgPosition,
+}: {
+  title: string;
+  subtitle: string;
+  consultant: Consultant;
+  imgPosition?: string;
+}) {
+  return (
+    <div className="flex flex-col gap-3">
+      <div>
+        <h3 className="text-base font-bold text-gray-900">{title} →</h3>
+        <p className="text-sm text-gray-500 italic">{subtitle}</p>
+      </div>
+      <MobileConsultantCard consultant={consultant} imgPosition={imgPosition} />
+    </div>
+  );
+}
+
+// ─── DESKTOP LAYOUT (original) ───────────────────────────────────────────────
 
 function ConsultantRow({
   consultant,
@@ -108,13 +175,12 @@ function ConsultantRow({
 }) {
   return (
     <div
-      className={`flex flex-col md:flex-row gap-10 items-start ${
-        reverse ? "md:flex-row-reverse" : ""
+      className={`flex flex-row gap-10 items-start ${
+        reverse ? "flex-row-reverse" : ""
       }`}
     >
-      {/* Photo */}
       <div className="flex-shrink-0">
-        <div className="w-64 h-80 rounded-2xl overflow-hidden ">
+        <div className="w-64 h-80 rounded-2xl overflow-hidden">
           <img
             src={consultant.image}
             alt={consultant.name}
@@ -122,8 +188,6 @@ function ConsultantRow({
           />
         </div>
       </div>
-
-      {/* Text + ticker */}
       <div className="flex-1 flex flex-col gap-4 pt-1 min-w-0">
         <div>
           <h3 className="text-2xl font-semibold text-gray-900 mb-1">
@@ -133,15 +197,13 @@ function ConsultantRow({
         <p className="text-base leading-relaxed text-gray-700">
           {consultant.bio}
         </p>
-
         <div className="flex items-center gap-3 mt-1">
-          <div className="h-px flex-1 " />
+          <div className="h-px flex-1" />
           <span className="text-xs uppercase tracking-widest text-gray-400 font-medium">
             Highlights
           </span>
-          <div className="h-px flex-1 " />
+          <div className="h-px flex-1" />
         </div>
-
         <div className="w-full overflow-hidden">
           <Ticker items={consultant.achievements} />
         </div>
@@ -172,19 +234,39 @@ function CategorySection({
   );
 }
 
+// ─── MAIN EXPORT ──────────────────────────────────────────────────────────────
+
 const AboutMe = () => (
-  <section className=" py-20">
+  <section className="py-12 md:py-20">
     <div className="container mx-auto max-w-6xl px-4">
       <div className="mb-8">
-        <h2 className="text-4xl md:text-6xl font-bold text-secondary mb-2">
+        <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold text-secondary mb-2">
           College is confusing.
         </h2>
-        <p className="text-base text-gray-700 italic">
+        <p className="text-sm md:text-base text-gray-700 italic">
           Don't worry – We've got you covered
         </p>
       </div>
 
-      <div className="flex flex-col gap-8">
+      {/* Mobile layout — hidden on md and above */}
+      <div className="flex flex-col gap-10 md:hidden">
+        <MobileCategorySection
+          title="Shooting for the top?"
+          subtitle="We understand what it takes to get there"
+          consultant={consultants[0]}
+          imgPosition="object-top"
+        />
+        <div className="h-px bg-gray-100" />
+        <MobileCategorySection
+          title="Or maybe you're completely lost?"
+          subtitle="It's not too late at all"
+          consultant={consultants[1]}
+          imgPosition="object-top"
+        />
+      </div>
+
+      {/* Desktop layout — hidden below md */}
+      <div className="hidden md:flex flex-col gap-8">
         <CategorySection
           title="Shooting for the top?"
           subtitle="We understand what it takes to get there"
