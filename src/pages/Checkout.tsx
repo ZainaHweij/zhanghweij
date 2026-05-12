@@ -142,7 +142,7 @@ export default function Checkout() {
     setClientSecret(null);
     setFetchError(false);
 
-    fetch("http://localhost:3001/api/create-payment-intent", {
+    fetch("/api/create-payment-intent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ priceId: selected.key }),
