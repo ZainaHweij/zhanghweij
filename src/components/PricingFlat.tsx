@@ -1,4 +1,5 @@
 import { Check } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const plans = [
   {
@@ -82,13 +83,12 @@ export default function PricingFlat() {
               </div>
 
               <p className="text-sm opacity-70 w-full">{plan.description}</p>
-
-              <button
-                className={`w-full rounded-xl py-3 font-medium transition ${plan.btn}`}
+              <Link
+                to="/#register"
+                className={`w-full flex items-center justify-center gap-2 text-sm font-semibold px-6 py-3 rounded-[14px] transition ${plan.btn}`}
               >
                 Get Started
-              </button>
-
+              </Link>
               <div
                 className={`space-y-3 w-full ${
                   plan.alignRight ? "flex flex-col items-end" : ""

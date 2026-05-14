@@ -172,12 +172,13 @@ export default function PricingStack() {
                 </div>
 
                 <p className="text-sm opacity-70 w-full">{plan.description}</p>
-
-                <button
-                  className={`w-full rounded-xl py-3 font-medium transition ${plan.btn}`}
-                >
-                  Get Started
-                </button>
+                <a href="#register" className="w-full">
+                  <button
+                    className={`w-full rounded-xl py-3 font-medium transition ${plan.btn}`}
+                  >
+                    Get Started
+                  </button>
+                </a>
 
                 <div
                   className={`space-y-3 w-full ${plan.alignRight ? "flex flex-col items-end" : ""}`}
@@ -242,12 +243,13 @@ export default function PricingStack() {
                   <p className="text-sm opacity-70 w-full">
                     {plan.description}
                   </p>
-
-                  <button
-                    className={`w-full rounded-xl py-3 font-medium transition ${plan.btn}`}
-                  >
-                    Get Started
-                  </button>
+                  <a href="#register" className="w-full">
+                    <button
+                      className={`w-full rounded-xl py-3 font-medium transition ${plan.btn}`}
+                    >
+                      Get Started
+                    </button>
+                  </a>
 
                   <div
                     className={`space-y-3 w-full ${plan.alignRight ? "flex flex-col items-end" : ""}`}

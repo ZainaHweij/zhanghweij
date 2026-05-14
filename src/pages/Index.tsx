@@ -10,7 +10,19 @@ import AboutMe from "@/components/AboutMe";
 import PricingComponent from "@/components/PricingComponent";
 import Help from "@/components/Help";
 
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+
 const Index = () => {
+  const { hash } = useLocation();
+
+  useEffect(() => {
+    if (hash === "#register") {
+      const el = document.getElementById("register");
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [hash]);
+
   return (
     <div className="w-full overflow-x-hidden">
       <Navbar />
@@ -47,10 +59,16 @@ const Index = () => {
                   size="lg"
                   className="bg-white text-black hover:bg-white/90 font-medium w-full sm:w-auto"
                 >
-                  <Link to="/checkout">
-                    Schedule a Free Call{" "}
-                    <ArrowRight className="ml-1" size={18} />
-                  </Link>
+                  <Button
+                    asChild
+                    size="lg"
+                    className="bg-white text-black hover:bg-white/90 font-medium w-full sm:w-auto"
+                  >
+                    <a href="#register">
+                      Schedule a Free Call{" "}
+                      <ArrowRight className="ml-1" size={18} />
+                    </a>
+                  </Button>
                 </Button>
                 <Button
                   asChild
