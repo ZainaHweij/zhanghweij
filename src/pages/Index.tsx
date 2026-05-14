@@ -58,7 +58,10 @@ const Index = () => {
                   size="lg"
                   className="w-full sm:w-auto"
                 >
-                  <a href="#services">Our Services</a>
+                  <Link to="/services">
+                    Our services
+                    <ArrowRight className="ml-1" size={18} />
+                  </Link>
                 </Button>
               </div>
             </div>

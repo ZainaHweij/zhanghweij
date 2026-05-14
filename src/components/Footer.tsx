@@ -35,10 +35,16 @@ const Footer = () => (
             </Link>
 
             <Link
-              to="/pricing"
+              to="/services"
               className="block text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors"
             >
-              Pricing
+              Services
+            </Link>
+            <Link
+              to="/checkout"
+              className="block text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors"
+            >
+              Checkout
             </Link>
           </div>
         </div>

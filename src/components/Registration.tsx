@@ -290,7 +290,15 @@ export default function Registration() {
 
   // ── Form ───────────────────────────────────────────────────────────────────
   return (
-    <div className="min-h-screen flex items-center justify-center mb-20">
+    <div className="min-h-screen flex-col flex items-center justify-center mb-20">
+      <div id="register" className="text-center mb-4 w-full max-w-2xl">
+        <h2 className="text-6xl font-extrabold tracking-tight text-gray-900 mb-2">
+          Register Now
+        </h2>
+        <p className="text-xl text-gray-500 mb-4">
+          Fill out the form below to get started — it only takes a minute.
+        </p>
+      </div>
       <div className="bg-white p-10 rounded-2xl shadow-lg w-full max-w-2xl">
         {/* STEP INDICATOR */}
         <div className="mb-6 flex justify-between">
